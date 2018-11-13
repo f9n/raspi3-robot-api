@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Robot Camera and Controller</title>
+	</head>
+	<body>
+		<img src="http://192.168.1.105:8081/" style="width:100%; max-width: 600px; max-height:600px; border-radius:10px"></img>
+    <div>
+      <button onClick="robot_forward()">Forward</button>
+      <button onClick="robot_backward()">Backward</button>
+      <button onClick="robot_turn_left()">Turn Left</button>
+      <button onClick="robot_turn_right()">Turn Right</button>
+      <button onClick="robot_stop()">Stop</button>
+    </div>
+    <script>
+    const robot_action = (action) => {
+      return fetch(`/api/v2/robot/whells/${action}`, { method: 'POST' })
+    }
+    const robot_forward = () => {
+      robot_action("forward").then(response => {
+        console.log(response)
+      })
+    }
+    const robot_backward = () => {
+      robot_action("backward").then(response => {
+        console.log(response)
+      })
+    }
+    const robot_turn_left = () => {
+      robot_action("turn_left").then(response => {
+        console.log(response)
+      })
+    }
+    const robot_turn_right = () => {
+      robot_action("turn_right").then(response => {
+        console.log(response)
+      })
+    }
+    const robot_stop = () => {
+      robot_action("stop").then(response => {
+        console.log(response)
+      })
+    }
+    
+    </script>
+	</body>
+</html>
