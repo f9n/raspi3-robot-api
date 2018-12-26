@@ -5,7 +5,7 @@ from flask import Flask, jsonify, render_template, Response, send_from_directory
 from hardware import camera
 
 
-def create_app(whells):
+def create_app(robot):
     app = Flask(__name__)
 
     ##### Video Stream
@@ -32,7 +32,7 @@ def create_app(whells):
     #####  Hardware
     @app.route("/api/v2/robot/direction/<string:action>", methods=["POST"])
     def robot_direction_action(action):
-        if not hasattr(whells, action):
+        if not hasattr(robot, action):
             return (
                 jsonify(
                     status="error", message="Robot api doesn't support this action"

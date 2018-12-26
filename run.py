@@ -1,7 +1,7 @@
 import argparse
 
 from app import create_app
-from hardware import Whells
+from hardware import Robot
 
 ROBOT_CONFIG = {
     "WHELLS": {
@@ -17,8 +17,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        whells = Whells.with_config(ROBOT_CONFIG["WHELLS"])
-        app = create_app(whells)
+        robot = Robot.with_config(config=ROBOT_CONFIG["WHELLS"], method="gpiozero")
+        app = create_app(robot)
 
         app.run(host=args.host, port=args.port)
     finally:
