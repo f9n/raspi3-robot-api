@@ -1,17 +1,14 @@
 from datetime import datetime
 
 from flask import Flask, jsonify, render_template, Response, send_from_directory
-import RPi.GPIO as GPIO
-import picamera
 
-from hardware import Camera, genFrame
+from hardware import camera
 
 
 def create_app(whells):
     app = Flask(__name__)
 
     ##### Video Stream
-
     @app.route("/v1")
     def index_v1():
         return render_template("index1.html")
@@ -20,7 +17,7 @@ def create_app(whells):
     def video_feed():
         """Video streaming route. Put this in the src attribute of an img tag."""
         return Response(
-            genFrame(Camera()), mimetype="multipart/x-mixed-replace; boundary=frame"
+            camera.get_frame(), mimetype="multipart/x-mixed-replace; boundary=frame"
         )
 
     @app.route("/v2")
@@ -29,8 +26,7 @@ def create_app(whells):
 
     @app.route("/api/v1/robot/stream/<cid>")
     def manuel_live_stream(cid):
-        with picamera.PiCamera() as camera:
-            camera.capture("app/static/image.jpg")
+        camera.take_a_picture("app/static/image.jpg")
         return send_from_directory(directory="static", filename="image.jpg")
 
     #####  Hardware

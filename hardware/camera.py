@@ -59,3 +59,12 @@ def genFrame(camera):
     while True:
         frame = camera.get_frame()
         yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
+
+
+def get_frame():
+    return genFrame(Camera())
+
+
+def take_a_picture(path):
+    with picamera.PiCamera() as camera:
+        camera.capture(path)
