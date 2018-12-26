@@ -34,13 +34,21 @@ def create_app(whells):
         return send_from_directory(directory="static", filename="image.jpg")
 
     #####  Hardware
-    @app.route("/api/v2/robot/whells/<string:action>", methods=["POST"])
-    def whells_action(action):
-        if not action in ["forward", "backward", "turn_left", "turn_right", "stop"]:
-            return jsonify(status="error", message="Whells api doesn't support this action"), 403
+    @app.route("/api/v2/robot/direction/<string:action>", methods=["POST"])
+    def robot_direction_action(action):
+        if not hasattr(whells, action):
+            return (
+                jsonify(
+                    status="error", message="Robot api doesn't support this action"
+                ),
+                403,
+            )
 
         action_method = getattr(whells, action)
         action_method()
-        return jsonify(status="success", message="Successfully completed the action.")
+        return (
+            jsonify(status="success", message="Successfully completed the action."),
+            200,
+        )
 
     return app

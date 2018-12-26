@@ -49,10 +49,10 @@ class Whells(object):
     @staticmethod
     def with_config(config):
         whells = Whells(
-            left_whell_forward_pinno=config["LEFT_WHELL"]["FORWARD_PINNO"],
-            left_whell_backward_pinno=config["LEFT_WHELL"]["BACKWARD_PINNO"],
-            right_whell_forward_pinno=config["RIGHT_WHELL"]["FORWARD_PINNO"],
-            right_whell_backward_pinno=config["RIGHT_WHELL"]["BACKWARD_PINNO"],
+            left_whell_forward_pinno=config["LEFT"]["FORWARD_PINNO"],
+            left_whell_backward_pinno=config["LEFT"]["BACKWARD_PINNO"],
+            right_whell_forward_pinno=config["RIGHT"]["FORWARD_PINNO"],
+            right_whell_backward_pinno=config["RIGHT"]["BACKWARD_PINNO"],
         )
         return whells
 
@@ -67,17 +67,21 @@ class Whells(object):
         self.right_whell.backward()
         time.sleep(sec)
 
-    def turn_left(self, sec=2):
+    def left(self, sec=2):
         print("Turning Left....")
         self.left_whell.backward()
         self.right_whell.forward()
         time.sleep(sec)
 
-    def turn_right(self, sec=2):
+    def right(self, sec=2):
         print("Turning Right...")
         self.left_whell.forward()
         self.right_whell.backward()
         time.sleep(sec)
+
+    def reverse(self, sec=2):
+        print("Reversing...")
+        pass
 
     def stop(self):
         print("Stopping...")

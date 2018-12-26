@@ -5,8 +5,8 @@ from hardware import Whells
 
 ROBOT_CONFIG = {
     "WHELLS": {
-        "LEFT_WHELL": {"FORWARD_PINNO": 11, "BACKWARD_PINNO": 13},
-        "RIGHT_WHELL": {"FORWARD_PINNO": 12, "BACKWARD_PINNO": 16},
+        "LEFT": {"FORWARD_PINNO": 11, "BACKWARD_PINNO": 13},
+        "RIGHT": {"FORWARD_PINNO": 12, "BACKWARD_PINNO": 16},
     }
 }
 
